@@ -23,10 +23,6 @@ import java.io.PrintWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-//after dockerizing frontend:
-/*@CrossOrigin(origins = {"http://94.130.181.51:8103"})
- */
-
 @WebServlet(name = "ApiPoetryCorpus", urlPatterns = "/apiPoetryCorpus")
 public class RuCorpusServlet extends HttpServlet {
 
