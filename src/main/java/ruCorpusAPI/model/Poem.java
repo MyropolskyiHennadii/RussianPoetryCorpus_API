@@ -267,6 +267,7 @@ public class Poem {
         jsonPoem.put("meter_group", meter_group);
         jsonPoem.put("poem_title", poem_title);
         jsonPoem.put("poem_info", poem_info);
+        jsonPoem.put("dedicated_to", dedicated_to);
         jsonPoem.put("poem_date", poem_date);
         jsonPoem.put("poem_year", poem_year);
         jsonPoem.put("book_source", book_source.composeJsonObject());

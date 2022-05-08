@@ -63,7 +63,6 @@ public class RuCorpusServlet extends HttpServlet {
                     "doPost -> Impossible read request data:" + e.getMessage(),
                     HttpServletResponse.SC_BAD_REQUEST);
         } catch (JSONException e){
-            LOGGER.trace("hmmm...");
             sendErrorToClient(response,
                     "doPost -> Impossible read json-data:" + e.getMessage(),
                     HttpServletResponse.SC_BAD_REQUEST);
@@ -129,6 +128,8 @@ public class RuCorpusServlet extends HttpServlet {
             if (year_writing > 0) {
                 listOfPoems = setYearWritingFilter(listOfPoems, year_writing);
             }
+        } catch (JSONException e) {
+            //nothing: there isn't year
         } catch (NumberFormatException e) {
             //nothing: there isn't year
         }
@@ -354,21 +355,11 @@ public class RuCorpusServlet extends HttpServlet {
      *
      * @param response
      * @param message
-     * @throws IOException
      */
     public static void sendErrorToClient(HttpServletResponse response, String message, int returnCode) {
         LOGGER.error(message);
-        response.setContentType("html/text");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out;
-        try {
-            out = response.getWriter();
-            out.print(message);
-            out.flush();
-        } catch (IOException e) {
-            LOGGER.error("Can not write to response: {}", e.getMessage());
-        }
         response.setStatus(returnCode);
+        LOGGER.info("Status {} was sent to client.", returnCode);
     }
 
     /**

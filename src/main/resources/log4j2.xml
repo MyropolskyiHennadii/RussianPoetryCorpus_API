@@ -6,8 +6,8 @@
         </Console>
         <RollingFile
                 name="ru.corpus.api"
-                fileName="${basedir}/logs/RuPoetryCorpus.log"
-                filePattern="${basedir}/logs/RuPoetryCorpus.%d{dd-MMM}.log.gz"
+                fileName="${sys:catalina.home}/logs/RuPoetryCorpus.log"
+                filePattern="${sys:catalina.home}/logs/RuPoetryCorpus.%d{dd-MMM}.log.gz"
                 ignoreExceptions="false"
                 immediateFlush="true">
             <PatternLayout>
@@ -34,7 +34,7 @@
             <AppenderRef ref="ru.corpus.api"/>
         </Logger>
 
-        <Root level="trace">
+        <Root level="debug">
             <AppenderRef ref="ConsoleAppender" />
             <AppenderRef ref="ru.corpus.api"/>
         </Root>
