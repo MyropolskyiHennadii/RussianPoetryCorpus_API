@@ -1,6 +1,7 @@
-package russianCorpusAPI.model;
+package ruCorpusAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -91,5 +92,19 @@ public class Rhyme {
     @Override
     public int hashCode() {
         return getId_rhymes();
+    }
+
+    /**
+     * composes json-representation for book-exemplar
+     */
+    public JSONObject composeJsonObject() {
+        JSONObject jsonRhyme = new JSONObject();
+        jsonRhyme.put("id_rhymes", id_rhymes);
+        jsonRhyme.put("rhyme_sort", rhyme_sort);
+        jsonRhyme.put("rhyme_kind", rhyme_kind);
+        jsonRhyme.put("rhyme_gender", rhyme_gender);
+        jsonRhyme.put("grammatical", grammatical);
+        jsonRhyme.put("clause", clause);
+        return jsonRhyme;
     }
 }

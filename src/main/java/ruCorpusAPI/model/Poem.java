@@ -1,7 +1,9 @@
-package russianCorpusAPI.model;
+package ruCorpusAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -250,5 +252,30 @@ public class Poem {
                 ", poem_link='" + poem_link + '\'' +
                 ", book_source=" + book_source +
                 '}';
+    }
+
+    /**
+     * composes json-representation for Artefact-exemplar
+     */
+    public JSONObject composeJsonObject(){
+        JSONObject jsonPoem = new JSONObject();
+        jsonPoem.put("id_verse", id_verse);
+        jsonPoem.put("coefficient_monotone", coefficient_monotone);
+        jsonPoem.put("epigraph", epigraph);
+        jsonPoem.put("max_number_of_stress_in_lines", max_number_of_stress_in_lines);
+        jsonPoem.put("translate_from", translate_from);
+        jsonPoem.put("meter_group", meter_group);
+        jsonPoem.put("poem_title", poem_title);
+        jsonPoem.put("poem_info", poem_info);
+        jsonPoem.put("poem_date", poem_date);
+        jsonPoem.put("poem_year", poem_year);
+        jsonPoem.put("book_source", book_source.composeJsonObject());
+        //lines
+        JSONArray linesJson = new JSONArray();
+        for (LineOfPoem line: getLinesOfPoemList()) {
+            linesJson.put(line.composeJsonObject());
+        }
+        jsonPoem.put("linesOfPoemList", linesJson);
+        return jsonPoem;
     }
 }

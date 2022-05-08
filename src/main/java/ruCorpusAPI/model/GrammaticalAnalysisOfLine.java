@@ -1,6 +1,7 @@
-package russianCorpusAPI.model;
+package ruCorpusAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -59,5 +60,15 @@ public class GrammaticalAnalysisOfLine {
     @Override
     public int hashCode() {
         return getId_grammatical_analysis();
+    }
+
+    /**
+     * composes json-representation for book-exemplar
+     */
+    public JSONObject composeJsonObject() {
+        JSONObject jsonGrammarLine = new JSONObject();
+        jsonGrammarLine.put("id_grammatical_analysis", id_grammatical_analysis);
+        jsonGrammarLine.put("representation", representation);
+        return jsonGrammarLine;
     }
 }

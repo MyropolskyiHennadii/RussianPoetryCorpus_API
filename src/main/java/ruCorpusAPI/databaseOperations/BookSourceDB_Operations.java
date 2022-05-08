@@ -1,9 +1,9 @@
-package russianCorpusAPI.databaseOperations;
+package ruCorpusAPI.databaseOperations;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import russianCorpusAPI.model.Author;
-import russianCorpusAPI.model.BookSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ruCorpusAPI.model.Author;
+import ruCorpusAPI.model.BookSource;
 
 import javax.persistence.*;
 
@@ -11,8 +11,7 @@ public class BookSourceDB_Operations {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("books_source_remote_admin");
     private final EntityManager em = emf.createEntityManager();
-    private static final Logger logger
-            = LoggerFactory.getLogger(BookSourceDB_Operations.class);
+    private static final Logger logger = LogManager.getLogger(BookSourceDB_Operations.class);
 
     public BookSource getBookSourceByID(int id) {
         //EntityManager em = emf.createEntityManager();

@@ -1,8 +1,8 @@
-package russianCorpusAPI.databaseOperations;
+package ruCorpusAPI.databaseOperations;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import russianCorpusAPI.model.Author;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ruCorpusAPI.model.Author;
 
 import javax.persistence.*;
 
@@ -10,8 +10,8 @@ public class AuthorDB_Operations {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("authors_remote_admin");
     private final EntityManager em = emf.createEntityManager();
-    private static final Logger logger
-            = LoggerFactory.getLogger(AuthorDB_Operations.class);
+    private static final Logger logger = LogManager.getLogger(AuthorDB_Operations.class);
+
 
     public Author getAuthorByName(String name) {
         Author author;

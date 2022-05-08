@@ -1,13 +1,43 @@
-package russianCorpusAPI.config;
+package ruCorpusAPI.config;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class CommonConstants {
 
     private static volatile CommonConstants instance;
     private static boolean flag = true;
+    private final Properties commonProperty = new Properties();//main properties
+
+    private static final Logger LOGGER = LogManager.getLogger(CommonConstants.class);
+
+    public Properties getCommonProperty() {
+        return commonProperty;
+    }
+
+    private void loadPropertiesFile(String filePath) {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        try (InputStream input = loader.getResourceAsStream(filePath)) {
+            if (input != null) {
+                commonProperty.load(input);
+            } else {
+                LOGGER.error("Null instead input stream!");
+                throw new FileNotFoundException("property file 'config.properties' isn't found in the classpath");
+            }
+        } catch (IOException e) {
+            LOGGER.error("Can't load property from path {}: {}", filePath, e.getMessage());
+        }
+    }
 
     private CommonConstants() {
         // to prevent instantiating by Reflection call
         if (flag) {
+            loadPropertiesFile("application.properties");
             flag = false;
         } else {
             throw new IllegalStateException("CommonConstants already initialized.");

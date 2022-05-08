@@ -1,4 +1,6 @@
-package russianCorpusAPI.model;
+package ruCorpusAPI.model;
+
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -54,5 +56,16 @@ public class MeterGroup {
     @Override
     public int hashCode() {
         return getId_meters();
+    }
+
+    /**
+     * composes json-representation for book-exemplar
+     */
+    public JSONObject composeJsonObject() {
+        JSONObject jsonMetertGroup = new JSONObject();
+        jsonMetertGroup.put("id_meters", id_meters);
+        jsonMetertGroup.put("foot_model", foot_model);
+        jsonMetertGroup.put("meter_name", meter_name);
+        return jsonMetertGroup;
     }
 }

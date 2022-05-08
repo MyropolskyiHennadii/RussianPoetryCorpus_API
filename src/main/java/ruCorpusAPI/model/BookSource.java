@@ -1,7 +1,8 @@
-package russianCorpusAPI.model;
+package ruCorpusAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -84,5 +85,17 @@ public class BookSource {
                 ", book_title='" + book_title + '\'' +
                 ", book_data='" + book_data +
                 '}';
+    }
+
+    /**
+     * composes json-representation for book-exemplar
+     */
+    public JSONObject composeJsonObject() {
+        JSONObject jsonBook = new JSONObject();
+        jsonBook.put("id_book_source", id_book_source);
+        jsonBook.put("book_title", book_title);
+        jsonBook.put("book_data", book_data);
+        jsonBook.put("author", author.composeJsonObject());
+        return jsonBook;
     }
 }

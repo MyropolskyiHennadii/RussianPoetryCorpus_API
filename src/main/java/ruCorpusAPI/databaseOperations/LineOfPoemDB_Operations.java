@@ -1,9 +1,9 @@
-package russianCorpusAPI.databaseOperations;
+package ruCorpusAPI.databaseOperations;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import russianCorpusAPI.model.LineOfPoem;
-import russianCorpusAPI.model.Poem;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ruCorpusAPI.model.LineOfPoem;
+import ruCorpusAPI.model.Poem;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,8 +11,7 @@ import java.util.List;
 public class LineOfPoemDB_Operations {
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("poems_remote_admin");
     private final EntityManager em = emf.createEntityManager();
-    private static final Logger logger
-            = LoggerFactory.getLogger(LineOfPoemDB_Operations.class);
+    private static final Logger logger = LogManager.getLogger(LineOfPoemDB_Operations.class);
 
     public LineOfPoem getLineOfPoemByID(int id) {
         //EntityManager em = emf.createEntityManager();

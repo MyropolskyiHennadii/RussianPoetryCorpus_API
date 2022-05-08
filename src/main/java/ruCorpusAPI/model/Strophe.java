@@ -1,6 +1,7 @@
-package russianCorpusAPI.model;
+package ruCorpusAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -75,5 +76,17 @@ public class Strophe {
                 ", solid_form='" + solid_form + '\'' +
                 ", lineOfPoem=" + lineOfPoem.getId_metrical_line() +
                 '}';
+    }
+
+    /**
+     * composes json-representation for book-exemplar
+     */
+    public JSONObject composeJsonObject() {
+        JSONObject jsonStrophe = new JSONObject();
+        jsonStrophe.put("id_strophes", id_strophes);
+        jsonStrophe.put("rhyme_type", rhyme_type);
+        jsonStrophe.put("strophe_type", strophe_type);
+        jsonStrophe.put("solid_form", solid_form);
+        return jsonStrophe;
     }
 }

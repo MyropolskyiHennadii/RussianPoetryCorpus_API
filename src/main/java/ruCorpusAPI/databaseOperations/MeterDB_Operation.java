@@ -1,16 +1,15 @@
-package russianCorpusAPI.databaseOperations;
+package ruCorpusAPI.databaseOperations;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import russianCorpusAPI.model.MeterGroup;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ruCorpusAPI.model.MeterGroup;
 
 import javax.persistence.*;
 
 public class MeterDB_Operation {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("meters_remote_admin");
-    private static final Logger logger
-            = LoggerFactory.getLogger(MeterDB_Operation.class);
+    private static final Logger logger = LogManager.getLogger(MeterDB_Operation.class);
 
     public MeterGroup getMeterByID(int id) {
         EntityManager em = emf.createEntityManager();
@@ -20,7 +19,7 @@ public class MeterDB_Operation {
     public MeterGroup getMeterByName(String name){
         MeterGroup meterGroup = null;
         EntityManager em = emf.createEntityManager();
-        TypedQuery<MeterGroup> q = em.createQuery("SELECT a FROM Meter a WHERE a.meter_name = '" + name + "'", MeterGroup.class);
+        TypedQuery<MeterGroup> q = em.createQuery("SELECT a FROM MeterGroup a WHERE a.meter_name = '" + name + "'", MeterGroup.class);
         try {
             EntityTransaction t = em.getTransaction();
             try {

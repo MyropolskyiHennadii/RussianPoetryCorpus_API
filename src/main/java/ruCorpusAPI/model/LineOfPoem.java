@@ -1,7 +1,8 @@
-package russianCorpusAPI.model;
+package ruCorpusAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 
@@ -195,5 +196,26 @@ public class LineOfPoem {
                 ", representation_with_spaces='" + representation_with_spaces + '\'' +
                 ", meter=" + meter_group +
                 '}';
+    }
+
+    /**
+     * composes json-representation for book-exemplar
+     */
+    public JSONObject composeJsonObject() {
+        JSONObject jsonLineOfPoem = new JSONObject();
+        jsonLineOfPoem.put("id_metrical_lines", id_metrical_lines);
+        jsonLineOfPoem.put("ending", ending);
+        jsonLineOfPoem.put("meter_group", meter_group);
+        jsonLineOfPoem.put("number_of_tonic_feet", number_of_tonic_feet);
+        jsonLineOfPoem.put("irregularity_on_syllable", irregularity_on_syllable);
+        jsonLineOfPoem.put("length", length);
+        jsonLineOfPoem.put("row_key", row_key);
+        jsonLineOfPoem.put("line", line);
+        jsonLineOfPoem.put("representation", representation);
+        jsonLineOfPoem.put("representation_with_spaces", representation_with_spaces);
+        jsonLineOfPoem.put("grammaticalAnalysisOfLine", grammaticalAnalysisOfLine.composeJsonObject());
+        jsonLineOfPoem.put("rhyme", rhyme.composeJsonObject());
+        jsonLineOfPoem.put("strophe", strophe.composeJsonObject());
+        return jsonLineOfPoem;
     }
 }

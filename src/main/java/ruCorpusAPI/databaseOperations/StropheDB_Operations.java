@@ -1,9 +1,9 @@
-package russianCorpusAPI.databaseOperations;
+package ruCorpusAPI.databaseOperations;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import russianCorpusAPI.model.LineOfPoem;
-import russianCorpusAPI.model.Strophe;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ruCorpusAPI.model.LineOfPoem;
+import ruCorpusAPI.model.Strophe;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,8 +12,7 @@ public class StropheDB_Operations {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("strophes_remote_admin");
     private EntityManager em = emf.createEntityManager();
-    private static final Logger logger
-            = LoggerFactory.getLogger(StropheDB_Operations.class);
+    private static final Logger logger = LogManager.getLogger(StropheDB_Operations.class);
 
     public Strophe getStropheByID(int id) {
        // EntityManager em = emf.createEntityManager();

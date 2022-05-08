@@ -1,10 +1,10 @@
-package russianCorpusAPI.databaseOperations;
+package ruCorpusAPI.databaseOperations;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import russianCorpusAPI.model.Author;
-import russianCorpusAPI.model.BookSource;
-import russianCorpusAPI.model.Poem;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ruCorpusAPI.model.Author;
+import ruCorpusAPI.model.BookSource;
+import ruCorpusAPI.model.Poem;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,8 +15,7 @@ public class PoemDB_Operation {
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("metrical_lines_remote_admin");
     private final EntityManager em = emf.createEntityManager();
 
-    private static final Logger logger
-            = LoggerFactory.getLogger(PoemDB_Operation.class);
+    private static final Logger logger = LogManager.getLogger(PoemDB_Operation.class);
 
     public Poem getPoemByID(int id) {
         //EntityManager em = emf.createEntityManager();
@@ -59,15 +58,10 @@ public class PoemDB_Operation {
     }
 
     public List<Poem> getPoemsByAuthorID(int id){
-        List<Poem> poemList = new ArrayList<>();
         TypedQuery<Poem> q = em.createQuery("SELECT a FROM Poem a WHERE a.book_source.author.id_author = '" + id + "'", Poem.class);
-        try {
-            poemList = q.getResultList();
-        } catch (NoResultException e) {
-            return null;
-        }
-        return poemList;
+        return q.getResultList();
     }
+
     public List<Poem> getPoemsByBook(BookSource bookSource) {
         List<Poem> poemList = new ArrayList<>();
         TypedQuery<Poem> q = em.createQuery("SELECT a FROM Poem a WHERE a.book_source = :bookSource", Poem.class);

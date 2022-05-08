@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="ruCorpusAPI> %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <RollingFile
+                name="ru.corpus.api"
+                fileName="${basedir}/logs/RuPoetryCorpus.log"
+                filePattern="${basedir}/logs/RuPoetryCorpus.%d{dd-MMM}.log.gz"
+                ignoreExceptions="false"
+                immediateFlush="true">
+            <PatternLayout>
+                <Pattern>ruCorpusAPI> %d{yyyy-MM-dd HH:mm:ss} %-5p %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB" />
+                <TimeBasedTriggeringPolicy interval="30"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Log everything in hibernate -->
+        <Logger name="org.hibernate" level="warn" additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="ru.corpus.api"/>
+        </Logger>
+        <!-- Log all SQL statements -->
+        <Logger name="org.hibernate.SQL" level="info" additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="ru.corpus.api"/>
+        </Logger>
+
+        <Root level="trace">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="ru.corpus.api"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>

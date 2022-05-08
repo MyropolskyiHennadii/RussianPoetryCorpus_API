@@ -1,6 +1,7 @@
-package russianCorpusAPI.model;
+package ruCorpusAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -60,5 +61,15 @@ public class Author {
     @Override
     public int hashCode() {
         return getAuthors_name().length();
+    }
+
+    /**
+     * composes json-representation for author-exemplar
+     */
+    public JSONObject composeJsonObject() {
+        JSONObject jsonAuthor = new JSONObject();
+        jsonAuthor.put("id_author", id_author);
+        jsonAuthor.put("authors_name", authors_name);
+        return jsonAuthor;
     }
 }

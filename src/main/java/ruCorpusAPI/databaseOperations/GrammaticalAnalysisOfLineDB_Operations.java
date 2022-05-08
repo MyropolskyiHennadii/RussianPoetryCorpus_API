@@ -1,9 +1,9 @@
-package russianCorpusAPI.databaseOperations;
+package ruCorpusAPI.databaseOperations;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import russianCorpusAPI.model.GrammaticalAnalysisOfLine;
-import russianCorpusAPI.model.LineOfPoem;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ruCorpusAPI.model.GrammaticalAnalysisOfLine;
+import ruCorpusAPI.model.LineOfPoem;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.List;
 public class GrammaticalAnalysisOfLineDB_Operations {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("grammatical_lines_remote_admin");
-    private static final Logger logger
-            = LoggerFactory.getLogger(GrammaticalAnalysisOfLineDB_Operations.class);
+    private static final Logger logger = LogManager.getLogger(GrammaticalAnalysisOfLineDB_Operations.class);
+
     private final EntityManager em = emf.createEntityManager();
 
     public GrammaticalAnalysisOfLine getGrammaticalAnalysisOfLineByID(int id) {
