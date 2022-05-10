@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
-import ruCorpusAPI.config.CommonConstants;
+import ruCorpusAPI.utils.CommonConstants;
 import ruCorpusAPI.databaseOperations.PoemDB_Operation;
 import ruCorpusAPI.exceptions.WrongRequestData;
 import ruCorpusAPI.model.LineOfPoem;
